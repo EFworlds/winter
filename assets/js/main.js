@@ -6,45 +6,28 @@
 
     let freez = 0;
     let frostDays = 0;
-    let frostPeriod = [];
-    let frostFlag = false;
-    maxFrostPeriod = frostPeriod[0];
-
-
+    let frostDaysTemp = 0;
+    
     for(let i = 0; i < winterDays.length - 1; i++){        
-        let frostFlag = false;
         if(winterDays[i] >= 0 && winterDays[i + 1] < 0){
             freez++;
         }
     }
 
+      
     for(let i = 0; i < winterDays.length; i++){
 
         if(winterDays[i] < 0){
-            frostDays++;
-            frostFlag = true;
+            frostDaysTemp++;     
 
+        }else{ 
+            if(frostDays < frostDaysTemp){
+            frostDays = frostDaysTemp;            
+            } 
+            frostDaysTemp = 0; 
         }
-
-        if(winterDays[i + 1] >= 0 && frostFlag){
-            
-            frostPeriod.push(frostDays);            
-            frostDays = 0;
-            frostFlag = false;
-        }
-
+         
     }
-    maxFrostPeriod = frostPeriod[0];
-     
-    for(let i = 1; i < frostPeriod.length; i++){
-        if(maxFrostPeriod < frostPeriod[i]){
-            maxFrostPeriod = frostPeriod[i];
-        }
-
-    }
-    
-
-    //console.log( winterDays.length);
+   
     console.log(`количество замерзаний ${freez}`);
-    //console.log(frostPeriod);
-    console.log(`самый длинный по продолжительности период заморозков ${maxFrostPeriod} дней`);
+    console.log(`самый длинный по продолжительности период заморозков ${frostDays} дней`);
